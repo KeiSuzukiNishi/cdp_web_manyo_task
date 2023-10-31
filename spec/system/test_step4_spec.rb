@@ -941,7 +941,6 @@ RSpec.describe 'step4', type: :system do
         expect(page).to have_content '本人以外アクセスできません'
       end
     end
-
     #page.driver.browser.switch_to.alert.acceptがエラー原因
     # describe '17.ユーザを削除した際、そのユーザに紐づいているすべてのタスクが削除されること' do
     #   before do

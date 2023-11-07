@@ -920,7 +920,7 @@ RSpec.describe 'step4', type: :system do
       end
     end
 
-    # テキストでは「アクセス権限がありません」と表示するように指示されているが、テスト内では「本人以外アクセスできません」という文字に変わっている。コードを「本人以外アクセスできません」に修正。
+    # テキストでは「」と表示するように指示されているが、テスト内では「本人以外アクセスできません」という文字に変わっている。コードを「本人以外アクセスできません」に修正。
     describe '16.他人のタスク詳細画面、あるいはタスク編集画面にアクセスしようとした場合、タスク一覧画面に遷移させ「本人以外アクセスできません」というフラッシュメッセージを表示させること' do
       let!(:second_user) { User.create(name: 'second_user_name', email: 'second_user@email.com', password: 'password', password_confirmation: 'password') } #password_confirmation: 'password'を追記
       let!(:second_user_task){Task.create(title: 'task_title', content: 'task_content', deadline_on: Date.today, priority: 0, status: 0, user_id: second_user.id)}

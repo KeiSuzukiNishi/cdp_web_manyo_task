@@ -32,14 +32,14 @@ class User < ApplicationRecord
 
   def check_last_admin
     if admin? && User.where(admin: true).count <= 1
-      errors.add(:base, '管理者権限を持つアカウントが0件になるため削除できません')
+      errors.add(:base, '管理者が0人になるため権限を変更できません')
       throw :abort
     end
   end
 
   def check_last_admin_on_update
     if admin_changed? && User.where(admin: true).count <= 1
-      errors.add(:base, '管理者権限を持つアカウントが0件になるため更新できません')
+      errors.add(:base, '管理者が0人になるため権限を変更できません')
       throw :abort
     end
   end

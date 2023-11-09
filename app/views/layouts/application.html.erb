@@ -22,7 +22,7 @@
       <li><%= link_to t("add_user"), new_admin_user_path, id: "add-user" %></li>
       <li><%= link_to t("tasks_index"), root_path, id: "tasks-index" %></li>
       <li><%= link_to t("new_task"), new_task_path, id: "new-task" %></li>
-      <li><%= link_to t("show_user"), admin_user_path(current_user.id), id: "account-setting" %></li>
+      <li><%= link_to t("show_user"), user_path(:user_id), id: "account-setting" %></li>
       <li><%= link_to t("logout"), session_path(current_user.id), method: :delete, id: "sign-out" %></li>
     <% else %>
       <li><%= link_to t("tasks_index"), root_path, id: "tasks-index" %></li>

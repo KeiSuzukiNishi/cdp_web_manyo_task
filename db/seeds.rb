@@ -3,7 +3,7 @@ User.create!(
   name: "一般ユーザー",
   email: "user@example.com",
   password: "password",
-  password_confirmation: "passowrd"
+  password_confirmation: "password"
   admin: false
 )
 
@@ -12,7 +12,7 @@ User.create!(
   name: "管理者",
   email: "admin@example.com",
   password: "adminpassword",
-  password_confirmation: "adminpassowrd"
+  password_confirmation: "adminpassword"
   admin: true
 )
 

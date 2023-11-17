@@ -1,18 +1,18 @@
 # 一般ユーザーのデータ
-User.create!(
+user = User.create!(
   name: "一般ユーザー",
   email: "user@example.com",
   password: "password",
-  password_confirmation: "password"
+  password_confirmation: "password",
   admin: false
 )
 
 # 管理者ユーザーのデータ
-User.create!(
+admin = User.create!(
   name: "管理者",
   email: "admin@example.com",
   password: "adminpassword",
-  password_confirmation: "adminpassword"
+  password_confirmation: "adminpassword",
   admin: true
 )
 

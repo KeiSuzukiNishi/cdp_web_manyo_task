@@ -27,8 +27,8 @@ RSpec.describe 'タスクモデル機能', type: :model do
   describe '検索機能' do
     # テストデータを複数作成する
     let!(:first_task) { FactoryBot.create(:task, title: 'first_task_title') }
-    let!(:second_task) { FactoryBot.create(:second_task, title: "second_task_title") }
-    let!(:third_task) { FactoryBot.create(:third_task, title: "third_task_title") }
+    let!(:second_task) { FactoryBot.create(:second_task, title: 'second_task_title') }
+    let!(:third_task) { FactoryBot.create(:third_task, title: 'third_task_title') }
     context 'scopeメソッドでタイトルのあいまい検索をした場合' do
       it "検索ワードを含むタスクが絞り込まれる" do
         # タイトルの検索メソッドをseach_titleとしてscopeで定義した場合のコード例

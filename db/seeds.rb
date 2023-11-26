@@ -1,13 +1,40 @@
-start_date = Time.now # 現在の日時を取得
+# 一般ユーザーのデータ
+user = User.create!(
+  name: "一般ユーザー",
+  email: "user@example.com",
+  password: "password",
+  password_confirmation: "password",
+  admin: false
+)
 
-10.times do |i|
+# 管理者ユーザーのデータ
+admin = User.create!(
+  name: "管理者",
+  email: "admin@example.com",
+  password: "adminpassword",
+  password_confirmation: "adminpassword",
+  admin: true
+)
+
+50.times do
   Task.create!(
-    title: "Title#{i+1}",
-    content: "Content#{i+1}",
-    created_at: start_date + (i+1).days,
-    deadline_on: start_date + (i + 10).days, # 現在の日時から3日後から順に日数を加算
-    priority: ["低", "中", "高"].sample, # ランダムに優先度を選択
-    status: ["未着手", "着手中", "完了"].sample # ランダムにステータスを選択
+    title: "一般ユーザータスク",
+    content: "一般ユーザータスクの詳細",
+    deadline_on: Date.today + rand(1..30).days,
+    priority: Task.priorities.keys.sample,
+    status: Task.statuses.keys.sample,
+    user: user  # 一般ユーザーに関連づけ
   )
 end
- 
+
+# タスクの生成（管理者ユーザーに関連づけ）
+50.times do
+  Task.create!(
+    title: "管理者タスク",
+    content: "管理者タスクの詳細",
+    deadline_on: Date.today + rand(1..30).days,
+    priority: Task.priorities.keys.sample,
+    status: Task.statuses.keys.sample,
+    user: admin  # 管理者ユーザーに関連づけ
+  )
+end

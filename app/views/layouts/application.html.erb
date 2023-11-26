@@ -10,14 +10,32 @@
   </head>
 
   <body>
-    <header>
+    <header>    
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "#{key}") %>
       <% end %>
-      <ul>
-        <li><%= link_to t("tasks_index"), root_path, id: "tasks-index" %></li>
-        <li><%= link_to t("new_task"), new_task_path, id: "new-task" %></li>
-      </ul>
+
+<ul>
+  <% if logged_in? %>
+    <% if current_user.admin? %> 
+      <li><%= link_to t("users_index"), admin_users_path, id: "users-index", class: "users-index" %></li>
+      <li><%= link_to t("add_user"), new_admin_user_path, id: "add-user" %></li>
+      <li><%= link_to t("tasks_index"), root_path, id: "tasks-index" %></li>
+      <li><%= link_to t("new_task"), new_task_path, id: "new-task" %></li>
+      <li><%= link_to t("show_user"), user_path(current_user.id), id: "account-setting" %></li>
+      <li><%= link_to t("logout"), session_path(current_user.id), method: :delete, id: "sign-out" %></li>
+    <% else %>
+      <li><%= link_to t("tasks_index"), root_path, id: "tasks-index" %></li>
+      <li><%= link_to t("new_task"), new_task_path, id: "new-task" %></li>
+      <li><%= link_to t("show_user"), user_path(current_user.id), id: "account-setting" %></li>
+      <li><%= link_to t("logout"), session_path(current_user.id), method: :delete, id: "sign-out" %></li>
+    <% end %>
+  <% else %>
+    <li><%= link_to t("sign-up"), new_user_path, id: "sign-up" %></li>
+    <li><%= link_to t("sign-in"), new_session_path, id: "sign-in" %></li>
+  <% end %>
+</ul>
+
     </header>
     <%= yield %>
   </body>

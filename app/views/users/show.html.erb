@@ -1,0 +1,10 @@
+<h1><%= t("user-show-page") %></h1>
+
+<p><%= t("name") %>: <%= @user.name %></p>
+<p><%= t("email") %>: <%= @user.email %></p>
+
+<div style="display: flex; align-items: center;">
+  <%= link_to t("edit"), edit_user_path(@user), id: "edit-user" %>
+  <p style="margin: 0 5px;">|</p>
+  <%= link_to t("destroy"), user_path(@user), method: :delete, data: { confirm: t("are_you_sure") }, id: "destroy-user" %>
+</div>

@@ -1,0 +1,34 @@
+<h1><%= t("admin-user-show-page") %></h1>
+
+<p><%= t("name") %>: <%= @user.name %></p>
+<p><%= t("email") %>: <%= @user.email %></p>
+<p><%= t("activerecord.attributes.user.admin") %>: <%= @user.admin ? t("activerecord.attributes.user.true") : t("activerecord.attributes.user.false") %></p>
+
+<% if @tasks.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t("activerecord.errors.attributes.task.title") %></th>
+        <th><%= t("activerecord.errors.attributes.task.content") %></th>
+        <th><%= t("activerecord.errors.attributes.task.created_at") %></th>
+        <th id="deadline_on"><%= t("activerecord.attributes.task.deadline_on") %></th>
+        <th id="priority"><%= t("activerecord.attributes.task.priority") %></th>
+        <th><%= t("activerecord.attributes.task.status") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td class="task-created-at"><%= l task.created_at %></td>
+          <td><%= task.deadline_on %></td>
+          <td><%= task.priority %></td>
+          <td><%= task.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to t("back"), admin_users_url, id: "back"  %>

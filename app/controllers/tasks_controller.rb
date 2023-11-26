@@ -1,10 +1,14 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :check_task_access, only: [:show, :edit]
+
     def new
         @task = Task.new
     end
 
     def create
         @task = Task.new(task_params)
+        @task.user_id = current_user.id
         if @task.save
           redirect_to root_path, notice: t('notice.task_created')
         else
@@ -13,7 +17,8 @@ class TasksController < ApplicationController
     end
     
     def index
-      @tasks = Task.all.page(params[:page])
+      @tasks = current_user.tasks
+      @tasks = @tasks.page(params[:page])
     
       if params[:sort_deadline_on] == "true"
         @tasks = @tasks.sorted_by_deadline
@@ -23,18 +28,16 @@ class TasksController < ApplicationController
         @tasks = @tasks.sorted_by_created_at
       end
     
-      logger.debug "Search Params: #{params[:search]}"
-      logger.debug "SQL Query: #{@tasks.to_sql}"
       if params[:search].present?
         if params[:search][:title].present? && params[:search][:status].present?
           @tasks = @tasks.search_title(params[:search][:title]).search_status(params[:search][:status])
-          flash[:notice] = "タイトルとステータスどっちも検索できました"
+          flash[:notice] = t('notice.searched_title_status') 
         elsif params[:search][:title].present?
           @tasks = @tasks.search_title(params[:search][:title])
-          flash[:notice] = "タイトルで検索できました"
+          flash[:notice] = t('notice.searched_title') 
         elsif params[:search][:status].present?
           @tasks = @tasks.search_status(params[:search][:status])
-          flash[:notice] = "ステータスで検索できました"
+          flash[:notice] = t('notice.searched_status') 
         end
       end
     end
@@ -70,4 +73,16 @@ class TasksController < ApplicationController
     def task_params
         params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
     end
+
+    def set_task
+      @task = Task.find(params[:id])
+    end
+  
+    def check_task_access
+      if @task.user != current_user
+        flash[:alert] = "アクセス権限がありません"
+        redirect_to tasks_path
+      end
+    end
 end
+

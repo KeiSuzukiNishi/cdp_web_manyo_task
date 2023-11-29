@@ -33,6 +33,10 @@ ja:
         users-index_page: ユーザ一覧ページ
         true: あり
         false: なし
+      label:
+        label: ラベル
+        name: 名前
+        total_tasks: タスク数
     messages:
       blank: を入力してください
   notice: 
@@ -53,6 +57,8 @@ ja:
     account_created: アカウントを登録しました
     login_required: ログインしてください
     logout_required: ログアウトしてください
+    label_destroyed: ラベルを削除しました
+    label_updated: ラベルを更新しました
   tasks_index: タスク一覧
   new_task: タスクを登録する
   show_user: アカウント設定
@@ -90,3 +96,11 @@ ja:
   admin: 管理者権限
   admin-user-show-page: ユーザ詳細ページ
   admin-user-edit-page: ユーザ編集ページ
+  labels_index: ラベル一覧
+  new_label: ラベルを登録する
+  labels_index_page: ラベル一覧ページ
+  new_label_page: ラベル登録ページ
+  create_label: 登録する
+  edit_label_page: ラベル編集ページ
+  update_label: 更新する
+  show_label_page: ラベル詳細ページ

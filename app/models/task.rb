@@ -18,6 +18,7 @@ class Task < ApplicationRecord
     scope :search_status, ->(status) { where(status: statuses[status]) }
 
     belongs_to :user
+    has_and_belongs_to_many :labels
 end
 
 

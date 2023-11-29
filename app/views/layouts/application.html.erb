@@ -27,6 +27,8 @@
     <% else %>
       <li><%= link_to t("tasks_index"), root_path, id: "tasks-index" %></li>
       <li><%= link_to t("new_task"), new_task_path, id: "new-task" %></li>
+      <li><%= link_to t("labels_index"), labels_path, id: "labels-index" %></li>
+      <li><%= link_to t("new_label"), new_label_path, id: "new-label" %></li>
       <li><%= link_to t("show_user"), user_path(current_user.id), id: "account-setting" %></li>
       <li><%= link_to t("logout"), session_path(current_user.id), method: :delete, id: "sign-out" %></li>
     <% end %>

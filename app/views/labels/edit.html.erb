@@ -1,0 +1,8 @@
+<h1><%= t("edit_label_page") %></h1>
+<%= form_with(model: @label, local: true) do |f| %>
+  <%= f.label :name, t("activerecord.attributes.label.name") %><br>
+  <%= f.text_field :name %><br>
+  <%= f.submit t("update_label"), id: "update-label"  %><br>
+<% end %>
+
+<%= link_to t("back"), labels_path, id: "back"  %>

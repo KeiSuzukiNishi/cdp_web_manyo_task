@@ -19,20 +19,20 @@
   <% end %>
 
   <% if @tasks.any? %>
-    <table class="table">
+    <table class="table border-top">
       <thead>
-        <tr>
-          <th scope="col"><%= t("activerecord.errors.attributes.task.title") %></th>
-          <th scope="col"><%= t("activerecord.errors.attributes.task.content") %></th>
-          <th scope="col"><%= t("activerecord.errors.attributes.task.created_at") %></th>
-          <th scope="col"><%= link_to t("activerecord.attributes.task.deadline_on"), sort_deadline_on: true, id: "deadline_on" %></th>
-          <th scope="col"><%= link_to t("activerecord.attributes.task.priority"), sort_priority: true, id: "priority"  %></th>
-          <th scope="col"><%= t("activerecord.attributes.task.status") %></th>
+        <tr class="border-bottom">
+          <th><%= t("activerecord.errors.attributes.task.title") %></th>
+          <th><%= t("activerecord.errors.attributes.task.content") %></th>
+          <th><%= t("activerecord.errors.attributes.task.created_at") %></th>
+          <th><%= link_to t("activerecord.attributes.task.deadline_on"), sort_deadline_on: true, id: "deadline_on" %></th>
+          <th><%= link_to t("activerecord.attributes.task.priority"), sort_priority: true, id: "priority"  %></th>
+          <th><%= t("activerecord.attributes.task.status") %></th>
         </tr>
       </thead>
       <tbody>
         <% @tasks.each do |task| %>
-          <tr>
+          <tr class="border-bottom">
             <td><%= task.title %></td>
             <td><%= task.content %></td>
             <td class="task-created-at"><%= l task.created_at %></td>

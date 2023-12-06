@@ -25,7 +25,7 @@
     <%= f.check_box :label_ids, { multiple: true, include_hidden: false }, label.id %>
     <%= label.name %><br>
   <% end %>
-  <%= f.submit t("create_task"), id: "create-task" %><br>
+  <%= f.submit t("create_task"), id: "create-task", class: "btn btn-primary"  %><br>
 <% end %>
 
 <%= link_to t("back"), tasks_path, id: "back" %>

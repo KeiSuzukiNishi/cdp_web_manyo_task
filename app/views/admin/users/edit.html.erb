@@ -21,6 +21,6 @@
     <%= f.password_field :password_confirmation %><br>
     <%= f.label :admin, t("admin") %><br>
     <%= f.check_box :admin %><br><br>
-    <%= f.submit t("update-user"), id: "update-user" %><br><br>
+    <%= f.submit t("update-user"), id: "update-user", class: "btn btn-primary" %><br><br>
     <%= link_to t("back"), admin_users_url, id: "back"  %>
 <% end %>

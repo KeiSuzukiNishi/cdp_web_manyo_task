@@ -14,7 +14,7 @@
 <%= form_with(model: @label, local: true) do |f| %>
   <%= f.label :name, t("activerecord.attributes.label.name") %><br>
   <%= f.text_field :name %><br>
-  <%= f.submit t("update_label"), id: "update-label"  %><br>
+  <%= f.submit t("update_label"), id: "update-label", class: "btn btn-primary"  %><br>
 <% end %>
 
 <%= link_to t("back"), labels_path, id: "back"  %>

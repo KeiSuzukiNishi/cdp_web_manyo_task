@@ -9,6 +9,10 @@
     <%= f.label :title, t("activerecord.errors.attributes.task.title") %>
     <%= f.text_field :title %>
   </div>
+  <div>
+    <%= f.label :label_id, t("activerecord.attributes.label.label") %>
+    <%= f.select :label_id, current_user.labels.collect { |l| [l.name, l.id] }, { include_blank: true } %>
+  </div>
   <%= f.submit t("search"), id: "search_task" %>
 <% end %>
 
@@ -22,7 +26,6 @@
         <th><%= link_to t("activerecord.attributes.task.deadline_on"), sort_deadline_on: true, id: "deadline_on" %></th>
         <th><%= link_to t("activerecord.attributes.task.priority"), sort_priority: true, id: "priority"  %></th>
         <th><%= t("activerecord.attributes.task.status") %></th>
-        <th><%= t("activerecord.attributes.label.label") %></th>
       </tr>
     </thead>
     <tbody>
@@ -34,12 +37,6 @@
           <td><%= task.deadline_on %></td>
           <td><%= task.priority %></td>
           <td><%= task.status %></td>
-          <td>
-          <% Label.all.each do |label| %>
-            <%= f.check_box :label_ids, { multiple: true }, label.id, nil %>
-            <%= label.name %><br>
-          <% end %>
-          </td>
           <td><%= link_to t("show"), task_path(task), class: "show-task" %></td>
           <td><%= link_to t("edit"), edit_task_path(task), class: "edit-task" %></td>
           <td><%= link_to t("destroy"), task_path(task), method: :delete, data: { confirm: t("are_you_sure") }, class: "destroy-task" %>

@@ -4,6 +4,7 @@ class TasksController < ApplicationController
 
     def new
         @task = Task.new
+        @user_labels = current_user.labels
     end
 
     def create
@@ -29,15 +30,27 @@ class TasksController < ApplicationController
       end
     
       if params[:search].present?
-        if params[:search][:title].present? && params[:search][:status].present?
+        if params[:search][:title].present? && params[:search][:status].present? && params[:search][:label_id]
+          @tasks = @tasks.search_title(params[:search][:title]).search_status(params[:search][:status]).search_labels(params[:search][:label_id])
+          flash[:notice] = t('notice.searched_title_status_label') 
+        elsif params[:search][:title].present? && params[:search][:status].present?
           @tasks = @tasks.search_title(params[:search][:title]).search_status(params[:search][:status])
           flash[:notice] = t('notice.searched_title_status') 
+        elsif params[:search][:title].present? && params[:search][:label_id]
+          @tasks = @tasks.search_title(params[:search][:title]).search_labels(params[:search][:label_id])
+          flash[:notice] = t('notice.searched_title_label') 
+        elsif params[:search][:status].present? && params[:search][:label_id]
+          @tasks = @tasks.search_status(params[:search][:status]).search_labels(params[:search][:label_id])
+          flash[:notice] = t('notice.searched_status_label') 
         elsif params[:search][:title].present?
           @tasks = @tasks.search_title(params[:search][:title])
           flash[:notice] = t('notice.searched_title') 
         elsif params[:search][:status].present?
           @tasks = @tasks.search_status(params[:search][:status])
           flash[:notice] = t('notice.searched_status') 
+        elsif params[:search][:label_id].present?
+          @tasks = @tasks.search_labels(params[:search][:label_id])
+          flash[:notice] = t('notice.searched_label')
         end
       end
     end
@@ -48,6 +61,7 @@ class TasksController < ApplicationController
     
     def edit
       @task = Task.find(params[:id])
+      @user_labels = current_user.labels
     end
 
     def update
@@ -71,7 +85,7 @@ class TasksController < ApplicationController
       private
     
     def task_params
-        params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+        params.require(:task).permit(:title, :content, :deadline_on, :priority, :status, label_ids: [])
     end
 
     def set_task

@@ -1,5 +1,16 @@
 <h1><%= t("new_label_page") %></h1>
 
+<% if @label.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@label.errors.count, "error") %> prohibited this <%= @label.name %> from being saved:</h2>
+    <ul>
+      <% @label.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with(model: @label, local: true) do |f| %>
   <%= f.label :name, t("activerecord.attributes.label.name") %><br>
   <%= f.text_field :name %><br>

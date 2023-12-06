@@ -54,11 +54,16 @@ ja:
     searched_title_status: タイトルとステータスどっちも検索できました
     searched_title: タイトルで検索できました
     searched_status: ステータスで検索できました
+    searched_label: ラベルで検索できました
+    searched_title_status_label: タイトル、ステータス、ラベルで検索できました
+    searched_title_label: タイトルとラベルどっちも検索できました
+    searched_status_label: ステータスとラベルどっちも検索できました
     account_created: アカウントを登録しました
     login_required: ログインしてください
     logout_required: ログアウトしてください
     label_destroyed: ラベルを削除しました
     label_updated: ラベルを更新しました
+    label_created: ラベルを登録しました
   tasks_index: タスク一覧
   new_task: タスクを登録する
   show_user: アカウント設定

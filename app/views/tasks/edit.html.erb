@@ -20,6 +20,11 @@
   <%= f.select :priority, Task.priorities.keys, include_blank: true %><br>
   <%= f.label :status, t("activerecord.attributes.task.status") %><br>
   <%= f.select :status, Task.statuses.keys, include_blank: true %><br>
+  <%= f.label :label, t("activerecord.attributes.label.label") %><br>
+  <% @user_labels.each do |label| %>
+    <%= f.check_box :label_ids, { multiple: true }, label.id, nil %>
+    <%= label.name %><br>
+  <% end %>
   <%= f.submit t("update_task"), id: "update-task"  %><br>
 <% end %>
 

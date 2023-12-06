@@ -1,8 +1,8 @@
 class LabelsController < ApplicationController
 
     def index
-        @labels = Label.all
-        @labels = Label.all.page(params[:page])
+        @labels = current_user.labels
+        @labels = @labels.page(params[:page])
     end
 
     def new
@@ -10,9 +10,9 @@ class LabelsController < ApplicationController
     end
 
     def create
-        @label = Label.new(label_params)
+        @label = current_user.labels.build(label_params)
         if @label.save
-            redirect_to labels_path
+            redirect_to labels_path, notice: t('notice.label_created')
         else
             render :new
         end
@@ -30,7 +30,6 @@ class LabelsController < ApplicationController
           render :edit
         end
     end
-
 
     def show
         @label = Label.find(params[:id])

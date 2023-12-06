@@ -21,8 +21,8 @@
   <%= f.label :status, t("activerecord.attributes.task.status") %><br>
   <%= f.select :status, Task.statuses.keys, include_blank: true %><br>
   <%= f.label :label, t("activerecord.attributes.label.label") %><br>
-  <% Label.all.each do |label| %>
-    <%= f.check_box :label_ids, { multiple: true }, label.id, nil %>
+  <% @user_labels.each do |label| %>
+    <%= f.check_box :label_ids, { multiple: true, include_hidden: false }, label.id %>
     <%= label.name %><br>
   <% end %>
   <%= f.submit t("create_task"), id: "create-task" %><br>

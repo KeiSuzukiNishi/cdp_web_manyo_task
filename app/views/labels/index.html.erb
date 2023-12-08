@@ -12,8 +12,8 @@
         <tr class="border-bottom">
           <td><%= label.name %></td>
           <td><%= label.total %></td>
-          <td><%= link_to t("edit"), edit_label_path(label), class: "edit-label" %></td>
-          <td><%= link_to t("destroy"), label_path(label), method: :delete, data: { confirm: t("are_you_sure") }, class: "destroy-label" %>
+          <td class="px-0 col-1"><%= link_to t("edit"), edit_label_path(label), class: "edit-label btn btn-primary col-11" %></td>
+          <td class="px-0 col-1"><%= link_to t("destroy"), label_path(label), method: :delete, data: { confirm: t("are_you_sure") }, class: "destroy-label btn btn-danger col-11" %>
         </tr>
       <% end %>
     </tbody>
@@ -22,5 +22,6 @@
 <% else %>
   <p>タスクが存在しません。</p>
 <% end %>
-
-<%= link_to t("back"), labels_path %>
+  <div class="form-group col-12 text-right">
+  <%= link_to t("back"), labels_path %>
+  </div>

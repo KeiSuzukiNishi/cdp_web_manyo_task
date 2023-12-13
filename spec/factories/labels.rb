@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :label do
-    name { "MyString" }
+    name { 'LabelTest' }
+    association :user
   end
 end

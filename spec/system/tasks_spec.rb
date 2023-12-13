@@ -100,7 +100,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       visit new_session_path
       fill_in 'session_email', with: @user.email
       fill_in 'session_password', with: @user.password
-      click_button 'create-session'
+      click_button I18n.t("sign-in")
       @task = FactoryBot.create(:task, title: 'first_task', created_at: '2023-02-18', priority: '中', status: '未着手', deadline_on: '2025-02-18', user: @user)
       @second_task = FactoryBot.create(:second_task, title: 'second_task', created_at: '2023-02-17', priority: '高', status: '着手中', deadline_on: '2025-02-17', user: @user)
       @third_task = FactoryBot.create(:third_task, title: 'third_task', created_at: '2023-02-16', priority: '低', status: '完了', deadline_on: '2025-02-16', user: @user)
@@ -108,14 +108,12 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タイトルであいまい検索をした場合' do
       it "検索ワードを含むタスクのみ表示される" do
-        # 1. タイトルであいまい検索をシミュレートする
+        
         fill_in 'search[title]', with: 'second'
         click_button I18n.t("search")
 
-        # 2. 検索結果に指定のタスクが含まれていることを確認
         expect(page).to have_text('second_task')
         
-        # 3. 検索結果に含まれていないタスクが表示されていないことを確認
         expect(page).not_to have_text('first_task')
         expect(page).not_to have_text('third_task')
       end
@@ -123,14 +121,12 @@ RSpec.describe 'タスク管理機能', type: :system do
 
     context 'ステータスで検索した場合' do
       it "検索したステータスに一致するタスクのみ表示される" do
-        # 1. ステータスで検索をシミュレートする
+
         select '着手中', from: 'search[status]'
         click_button I18n.t("search")
         
-        # 2. 検索結果に指定のステータスに一致するタスクが含まれていることを確認
         expect(page).to have_text('second_task')
         
-        # 3. 検索結果に含まれていないステータスのタスクが表示されていないことを確認
         expect(page).not_to have_text('first_task')
         expect(page).not_to have_text('third_task')
       end
@@ -138,15 +134,13 @@ RSpec.describe 'タスク管理機能', type: :system do
 
     context 'タイトルとステータスで検索した場合' do
       it "検索ワードをタイトルに含み、かつステータスに一致するタスクのみ表示される" do
-        # 1. タイトルとステータスで検索をシミュレートする
+
         fill_in 'search[title]', with: 'task'
         select '着手中', from: 'search[status]'
         click_button I18n.t("search")
         
-        # 2. 検索結果に指定の条件に一致するタスクが含まれていることを確認
         expect(page).to have_text('second_task')
         
-        # 3. 検索結果に含まれていないタスクが表示されていないことを確認
         expect(page).not_to have_text('first_task')
         expect(page).not_to have_text('third_task')
       end
@@ -154,16 +148,14 @@ RSpec.describe 'タスク管理機能', type: :system do
 
     context '新たにタスクを作成した場合' do
       it '新しいタスクが一番上に表示される' do
-        # タスクを新規作成
+
         @task = FactoryBot.create(:task)
 
-        # 一覧画面に戻って新しいタスクが一番上に表示されているか確認
         visit tasks_path
         expect(page).to have_content('登録表示のテスト内容')
         expect(page).to have_selector('tbody tr:first-child', text: '登録表示のテスト内容')
 
-        # テスト中にデータベースに変更を加えた後、データベースの状態を確認
-        expect(Task.count).to eq(4) # タスクが1つ追加されたことを確認
+        expect(Task.count).to eq(4) 
       end
     end
   end
@@ -194,6 +186,29 @@ RSpec.describe 'タスク管理機能', type: :system do
       cached_data = Rails.cache.read('some_key')
   
       expect(cached_data).to eq('some_value')
+    end
+  end
+
+  describe '検索機能' do
+    before do
+      @user = FactoryBot.create(:user)
+      visit new_session_path
+      fill_in 'session_email', with: @user.email
+      fill_in 'session_password', with: @user.password
+      click_button 'create-session'
+      @label = FactoryBot.create(:label, user: @user)
+      @label2 = FactoryBot.create(:label, name: 'LabelTest2', user: @user)
+      @task = FactoryBot.create(:task, user: @user)
+    end
+    context 'ラベルで検索をした場合' do
+      it "そのラベルの付いたタスクがすべて表示される" do
+
+        select 'LabelTest', from: 'search[label_id]'
+        click_button I18n.t("search")
+
+        expect(page).to have_text('LabelTest')
+        expect(page).not_to have_text('LabelTest2')
+      end
     end
   end
 end  

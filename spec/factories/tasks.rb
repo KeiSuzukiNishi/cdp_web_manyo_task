@@ -6,6 +6,9 @@ FactoryBot.define do
     priority { '中' }
     status { '未着手' }
     user
+    after(:create) do |task|
+      task.labels << FactoryBot.create(:label)
+    end
   end
 
   factory :second_task, class: Task do

@@ -19,4 +19,6 @@ body.error_page {
     margin-top: 10px;
   }
 
-  
+  .center-block {
+    margin: 0 auto;
+  }

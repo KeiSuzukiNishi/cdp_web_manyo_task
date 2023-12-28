@@ -18,6 +18,9 @@ FactoryBot.define do
     priority { '高' }
     status { '着手中' }
     user
+    after(:create) do |task|
+      task.labels << FactoryBot.create(:label)
+    end
   end
 
   factory :third_task, class: Task do

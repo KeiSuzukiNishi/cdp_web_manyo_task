@@ -199,15 +199,18 @@ RSpec.describe 'タスク管理機能', type: :system do
       @label = FactoryBot.create(:label, user: @user)
       @label2 = FactoryBot.create(:label, name: 'LabelTest2', user: @user)
       @task = FactoryBot.create(:task, user: @user)
+      @task.labels << @label
+      @task2 = FactoryBot.create(:second_task, user: @user)
+      @task2.labels << @label2
     end
     context 'ラベルで検索をした場合' do
       it "そのラベルの付いたタスクがすべて表示される" do
-
+        visit tasks_path
         select 'LabelTest', from: 'search[label_id]'
         click_button I18n.t("search")
 
-        expect(page).to have_text('LabelTest')
-        expect(page).not_to have_text('LabelTest2')
+        expect(page).to have_text(@task.title)
+        expect(page).not_to have_text(@task2.title)
       end
     end
   end

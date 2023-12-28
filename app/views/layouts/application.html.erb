@@ -26,6 +26,8 @@
                   <%= link_to t("add_user"), new_admin_user_path, id: "add-user", class: "nav-item nav-link" %>
                   <%= link_to t("tasks_index"), root_path, id: "tasks-index", class: "nav-item nav-link" %>
                   <%= link_to t("new_task"), new_task_path, id: "new-task", class: "nav-item nav-link" %>
+                  <%= link_to t("labels_index"), labels_path, id: "labels-index", class: "nav-item nav-link" %>
+                  <%= link_to t("new_label"), new_label_path, id: "new-label", class: "nav-item nav-link" %>
                   <%= link_to t("show_user"), user_path(current_user.id), id: "account-setting", class: "nav-item nav-link" %>
                   <%= link_to t("logout"), session_path(current_user.id), method: :delete, id: "sign-out", class: "nav-item nav-link" %>
                 <% else %>

@@ -1,8 +1,20 @@
-<h1><%= t("sign-in-page") %></h1>
-<%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
-  <%= f.label :email, t("email") %><br>
-  <%= f.email_field :email %><br>
-  <%= f.label :password, t("password") %><br>
-  <%= f.password_field :password %><br><br>
-  <%= f.submit t("sign-in"), id: "create-session" %>
-<% end %>
+<div class="center-block col-7">
+  <div class="col-12">
+    <h1><%= t("sign-in-page") %></h1>
+  </div>
+  <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+    <div class="form-row">
+      <div class="form-group col-12">
+        <%= f.label :email, t("email") %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group col-12">
+        <%= f.label :password, t("password") %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+      <div class="form-group col-12 text-right">
+        <%= f.submit t("sign-in"), id: "create-session", class: "btn btn-primary col-md-sm-3" %>
+      </div>
+    </div>
+  <% end %>
+</div>

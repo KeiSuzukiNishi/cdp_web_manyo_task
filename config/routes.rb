@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :tasks
   resources :sessions, only: [:new, :create, :destroy]
   resources :admins
+  resources :labels
   
   resources :users, only: [:new, :create, :show, :update, :destroy] do
     get 'edit', on: :member
@@ -20,4 +21,6 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
+  # エラーページ用のルート
+  get '/errors/internal_server_error', to: 'errors#internal_server_error'
 end

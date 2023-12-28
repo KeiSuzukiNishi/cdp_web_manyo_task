@@ -1,0 +1,29 @@
+<div class="center-block col-7">
+  <div class="col-12">
+    <h1><%= t("new_label_page") %></h1>
+  </div>
+  <% if @label.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@label.errors.count, "error") %> prohibited this <%= @label.name %> from being saved:</h2>
+      <ul>
+        <% @label.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <%= form_with(model: @label, local: true) do |f| %>
+    <div class="form-row">
+      <div class="form-group col-12">
+        <%= f.label :name, t("activerecord.attributes.label.name") %><br>
+        <%= f.text_field :name, class: "form-control" %><br>
+      </div>
+      <div class="form-group col-12 text-right">
+        <%= f.submit t("create_label"), class: "btn btn-primary col-md-sm-3" %><br>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group col-12 text-right">
+    <%= link_to t("back"), labels_path, id: "back" %>
+  </div>
+</div>

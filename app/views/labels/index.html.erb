@@ -1,0 +1,27 @@
+<h1><%= t("labels_index_page") %></h1>
+<% if @labels.any? %>
+  <table class="table border-top">
+    <thead>
+      <tr class="border-bottom">
+        <th><%= t("activerecord.attributes.label.name") %></th>
+        <th><%= t("activerecord.attributes.label.total_tasks") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @labels.each do |label| %>
+        <tr class="border-bottom">
+          <td><%= label.name %></td>
+          <td><%= label.total %></td>
+          <td class="px-0 col-1"><%= link_to t("edit"), edit_label_path(label), class: "edit-label btn btn-primary col-11" %></td>
+          <td class="px-0 col-1"><%= link_to t("destroy"), label_path(label), method: :delete, data: { confirm: t("are_you_sure") }, class: "destroy-label btn btn-danger col-11" %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate Kaminari.paginate_array(@labels).page(params[:page]) %>
+<% else %>
+  <p>タスクが存在しません。</p>
+<% end %>
+  <div class="form-group col-12 text-right">
+  <%= link_to t("back"), tasks_path %>
+  </div>

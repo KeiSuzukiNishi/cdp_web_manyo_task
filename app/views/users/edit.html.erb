@@ -19,6 +19,6 @@
     <%= f.password_field :password %><br>
     <%= f.label :password_confirmation, t("password_confirmation") %><br>
     <%= f.password_field :password_confirmation %><br><br>
-    <%= f.submit t("update-user"), id: "update-user" %><br><br>
+    <%= f.submit t("update-user"), id: "update-user", class: "btn btn-primary" %><br><br>
     <%= link_to t("back"), user_path(@user), id: "back"  %>
 <% end %>

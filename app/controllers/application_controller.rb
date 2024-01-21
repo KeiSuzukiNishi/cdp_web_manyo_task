@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   before_action :login_required
-  before_action :logout_required, only: [:new, :create], unless: -> { is_admin_controller? }
+  # before_action :logout_required, only: [:new, :create]
 
   private
 
@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
   end
 
   def logout_required
-    if (current_user && is_task_registration_action?) || (current_user && current_user.admin?)
+    if logged_in?
+    # if (controller_name == 'sessions' && action_name == 'new' || controller_name == 'users' && action_name == 'new')
       flash[:alert] = t('notice.logout_required')
       redirect_to tasks_path
     end

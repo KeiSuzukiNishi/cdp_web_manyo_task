@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   before_validation :check_last_admin_on_update, on: :update
   before_destroy :check_last_admin
-  #before_update :check_last_admin
   
   before_validation { email.downcase! }
   has_secure_password
@@ -13,6 +12,7 @@ class User < ApplicationRecord
   validate :password_confirmation_matches
 
   has_many :tasks, dependent: :destroy
+  has_many :labels
 
   def destroy_with_tasks
     self.destroy

@@ -1,26 +1,46 @@
-<h1><%= t("admin-user-edit-page") %></h1>
-<% if @user.errors.any? %>
-    <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-        <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </ul>
+<div class="center-block col-7">
+    <div class="col-12">
+        <h1><%= t("admin-user-edit-page") %></h1>
     </div>
-<% end %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
 
-<%= form_with(model: @user, url: admin_user_path(@user), method: :patch, local: true) do |f| %>
-    <%= f.label :name, t("name") %><br>
-    <%= f.text_field :name %><br>
-    <%= f.label :email, t("email") %><br>
-    <%= f.email_field :email %><br>
-    <%= f.label :password, t("password") %><br>
-    <%= f.password_field :password %><br>
-    <%= f.label :password_confirmation, t("password_confirmation") %><br>
-    <%= f.password_field :password_confirmation %><br>
-    <%= f.label :admin, t("admin") %><br>
-    <%= f.check_box :admin %><br><br>
-    <%= f.submit t("update-user"), id: "update-user" %><br><br>
-    <%= link_to t("back"), admin_users_url, id: "back"  %>
-<% end %>
+    <%= form_with(model: @user, url: admin_user_path(@user), method: :patch, local: true) do |f| %>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <%= f.label :name, t("name") %>
+                <%= f.text_field :name, class: "form-control" %>
+            </div>
+            <div class="form-group col-12">
+                <%= f.label :email, t("email") %>
+                <%= f.email_field :email, class: "form-control" %>
+            </div>
+            <div class="form-group col-12">
+                <%= f.label :password, t("password") %>
+                <%= f.password_field :password, class: "form-control" %>
+            </div>
+            <div class="form-group col-12">
+                <%= f.label :password_confirmation, t("password_confirmation") %>
+                <%= f.password_field :password_confirmation, class: "form-control" %>
+            </div>
+            <div class="form-group col-12">
+                <%= f.label :admin, t("admin") %>
+                <%= f.check_box :admin, class: "form-control col-1" %>
+            </div>
+            <div class="form-group col-12 text-right">
+                <%= f.submit t("update-user"), id: "update-user", class: "btn btn-primary col-md-sm-3" %>
+            </div>
+            <div class="form-group col-12 text-right">
+                <%= link_to t("back"), admin_users_url, id: "back"  %>
+            </div>
+        </div>
+    <% end %>  
+</div>

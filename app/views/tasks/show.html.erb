@@ -1,38 +1,50 @@
-<h1><%= t("show_task_page") %></h1>
+<div class="center-block col-9">
+  <h1><%= t("show_task_page") %></h1>
 
-<div class="task-info">
-  <div class="info-item">
-    <span class="info-label"><%= t("activerecord.errors.attributes.task.title") %>:</span>
-    <span class="info-value"><%= @task.title %></span>
-  </div>
+  <div class="task-info">
+    <div class="info-item">
+      <span class="info-label"><%= t("activerecord.errors.attributes.task.title") %>:</span>
+      <span class="info-value"><%= @task.title %></span>
+    </div>
 
-  <div class="info-item">
-    <span class="info-label"><%= t("activerecord.errors.attributes.task.content") %>:</span>
-    <span class="info-value"><%= @task.content %></span>
-  </div>
+    <div class="info-item">
+      <span class="info-label"><%= t("activerecord.errors.attributes.task.content") %>:</span>
+      <span class="info-value"><%= @task.content %></span>
+    </div>
 
-  <div class="info-item">
-    <span class="info-label"><%= t("activerecord.errors.attributes.task.created_at") %>:</span>
-    <span class="info-value"><%= l @task.created_at %></span>
-  </div>
+    <div class="info-item">
+      <span class="info-label"><%= t("activerecord.errors.attributes.task.created_at") %>:</span>
+      <span class="info-value"><%= l @task.created_at %></span>
+    </div>
 
-  <div class="info-item">
-    <span class="info-label"><%= t("activerecord.attributes.task.deadline_on") %>:</span>
-    <span class="info-value"><%= @task.deadline_on %></span>
-  </div>
+    <div class="info-item">
+      <span class="info-label"><%= t("activerecord.attributes.task.deadline_on") %>:</span>
+      <span class="info-value"><%= @task.deadline_on %></span>
+    </div>
 
-  <div class="info-item">
-    <span class="info-label"><%= t("activerecord.attributes.task.priority") %>:</span>
-    <span class="info-value"><%= @task.priority %></span>
-  </div>
+    <div class="info-item">
+      <span class="info-label"><%= t("activerecord.attributes.task.priority") %>:</span>
+      <span class="info-value"><%= @task.priority %></span>
+    </div>
 
-  <div class="info-item">
-    <span class="info-label"><%= t("activerecord.attributes.task.status") %>:</span>
-    <span class="info-value"><%= @task.status %></span>
+    <div class="info-item">
+      <span class="info-label"><%= t("activerecord.attributes.task.status") %>:</span>
+      <span class="info-value"><%= @task.status %></span>
+    </div>
+
+    <div class="info-item">
+      <span class="info-label"><%= t("activerecord.attributes.label.label") %>:</span>
+      <span class="info-value">
+      <% @task.labels.each do |label| %>
+        <%= label.name %>
+        <% unless label == @task.labels.last %>, <% end %>
+      <% end %>
+    </span>
+    </div>
   </div>
-</div>
-<div style="display: flex; align-items: center;">
-  <%= link_to t("edit"), edit_task_path(@task), id: "edit-task" %>
-  <p style="margin: 0 5px;">|</p>
-  <%= link_to t("back"), tasks_path, id: "back" %>
+  <div style="display: flex; align-items: center;">
+    <%= link_to t("edit"), edit_task_path(@task), id: "edit-task" %>
+    <p style="margin: 0 5px;">|</p>
+    <%= link_to t("back"), tasks_path, id: "back" %>
+  </div>
 </div>

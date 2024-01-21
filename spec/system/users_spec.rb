@@ -17,13 +17,9 @@ RSpec.describe 'ユーザ管理機能', type: :system do
     end
 
     context 'ログインせずにタスク一覧画面に遷移した場合' do
-      before do
-        visit tasks_path
-      end
       it 'ログイン画面に遷移し、「ログインしてください」というメッセージが表示される' do
-        #visit new_session_path
-        flash_message = find('.alert') 
-        expect(flash_message).to have_content('ログインしてください')
+        visit tasks_path
+        expect(page).to have_content 'ログインしてください'
       end
     end
   end
@@ -39,8 +35,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
       end
       it 'タスク一覧画面に遷移し、「ログインしました」というメッセージが表示される' do
         #visit tasks_path
-        flash_message = find('.alert') # フラッシュメッセージをラップした要素を選択
-        expect(flash_message).to have_content('ログインしました')
+        expect(page).to have_content'ログインしました'
       end
       it '自分の詳細画面にアクセスできる' do
           visit user_path(@user)
@@ -118,8 +113,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
       end
       it 'タスク一覧画面に遷移し、「管理者以外アクセスできません」というエラーメッセージが表示される' do
         expect(page).to have_content 'タスク一覧ページ'
-        flash_message = find('.alert') # フラッシュメッセージをラップした要素を選択
-        expect(flash_message).to have_content('管理者以外アクセスできません')
+        expect(page).to have_content'管理者以外アクセスできません'
       end
     end
   end

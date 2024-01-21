@@ -1,9 +1,9 @@
 <h1 id="users-index"><%= t("activerecord.attributes.user.users-index_page") %></h1>
 
 <% if @users.any? %>
-  <table id="user-table">
+  <table id="user-table" class="table border-top">
     <thead>
-      <tr>
+      <tr class="border-bottom">
         <th><%= t("activerecord.attributes.user.name") %></th>
         <th><%= t("activerecord.attributes.user.email") %></th>
         <th><%= t("activerecord.attributes.user.admin") %></th>
@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <% @users.includes(:tasks).each do |user| %>
-        <tr>
+        <tr class="border-bottom">
           <td><%= user.name %></td>
           <td><%= user.email %></td>
           <td><%= user.admin ? t("activerecord.attributes.user.true") : t("activerecord.attributes.user.false") %></td>

@@ -16,8 +16,9 @@ class Task < ApplicationRecord
   
     scope :search_title, ->(title) { where("title LIKE ?", "%#{title}%") }
     scope :search_status, ->(status) { where(status: statuses[status]) }
-
+    scope :search_labels, ->(labels) { left_joins(:labels).where(labels: { id: labels }).includes(:labels) }
     belongs_to :user
+    has_and_belongs_to_many :labels
 end
 
 

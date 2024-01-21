@@ -1,10 +1,11 @@
-<h1><%= t("user-show-page") %></h1>
+<div class="center-block col-7">
+  <h1><%= t("user-show-page") %></h1>
 
-<p><%= t("name") %>: <%= @user.name %></p>
-<p><%= t("email") %>: <%= @user.email %></p>
+  <p><%= t("name") %>: <%= @user.name %></p>
+  <p><%= t("email") %>: <%= @user.email %></p>
 
-<div style="display: flex; align-items: center;">
-  <%= link_to t("edit"), edit_user_path(@user), id: "edit-user" %>
-  <p style="margin: 0 5px;">|</p>
-  <%= link_to t("destroy"), user_path(@user), method: :delete, data: { confirm: t("are_you_sure") }, id: "destroy-user" %>
+  <div style="display: flex; align-items: center;">
+    <div class="px-0 col-2"><%= link_to t("edit"), edit_user_path(@user), id: "edit-user", class: "edit-task btn btn-primary col-11" %></div>
+    <div class="px-0 col-2"><%= link_to t("destroy"), user_path(@user), method: :delete, data: { confirm: t("are_you_sure") }, id: "destroy-user", class: "destroy-task btn btn-danger col-11" %></div>
+  </div>
 </div>
